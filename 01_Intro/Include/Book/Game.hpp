@@ -36,6 +36,8 @@ class Game : private sf::NonCopyable
 		bool					mIsMovingDown;
 		bool					mIsMovingRight;
 		bool					mIsMovingLeft;
+		bool					mIsRotatingLeft;
+		bool					mIsRotatingRight;
 };
 
 #endif // BOOK_GAME_HPP

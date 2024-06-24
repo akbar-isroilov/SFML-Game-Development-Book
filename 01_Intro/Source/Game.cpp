@@ -25,6 +25,7 @@ Game::Game()
 
 	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(100.f, 100.f);
+	mPlayer.setOrigin(25.f, 35.f);
 	
 	mFont.loadFromFile("Media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
@@ -86,8 +87,17 @@ void Game::update(sf::Time elapsedTime)
 		movement.x -= PlayerSpeed;
 	if (mIsMovingRight)
 		movement.x += PlayerSpeed;
+
+	const float RotateSpeed = 5.f;
+	float rotation = 0.f;
+
+	if (mIsRotatingLeft)
+		rotation -= RotateSpeed;
+	if (mIsRotatingRight)
+		rotation += RotateSpeed;
 		
 	mPlayer.move(movement * elapsedTime.asSeconds());
+	mPlayer.rotate(rotation);
 }
 
 void Game::render()
@@ -124,4 +134,8 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 		mIsMovingLeft = isPressed;
 	else if (key == sf::Keyboard::D)
 		mIsMovingRight = isPressed;
+	else if (key == sf::Keyboard::Q)
+		mIsRotatingLeft = isPressed;
+	else if (key == sf::Keyboard::E)
+		mIsRotatingRight = isPressed;
 }
